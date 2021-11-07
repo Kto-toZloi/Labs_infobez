@@ -4,6 +4,7 @@ from Lab_2_Diffie_Hellman.Negotiator import *
 from Lab_2_Diffie_Hellman.bum_in_the_middle import *
 import Lab_3_RSA.Sender
 import Lab_3_RSA.Receiver as Приёмник
+from Lab_4_SRP.Хэш_функция import hash_it
 
 
 def lab_1():
@@ -35,8 +36,13 @@ def lab_3():
     Приёмник.Принимающий().отправитель.отправить()
 
 def lab_4():
-    pass
+
+    s = "qwezxczxczxczxczxvgfdshsdfns"
+    b = ""
+    for i in s:
+        b += i
+        hash_it(b)
 
 
 if __name__ == '__main__':
-    lab_3()
+    lab_4()
