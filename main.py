@@ -4,7 +4,9 @@ from Lab_2_Diffie_Hellman.Negotiator import *
 from Lab_2_Diffie_Hellman.bum_in_the_middle import *
 import Lab_3_RSA.Sender
 import Lab_3_RSA.Receiver as Приёмник
-from Lab_4_SRP.Хэш_функция import hash_it
+from Lab_4_SRP.Клиент import Клиент
+from Lab_4_SRP.Сервер import Сервер
+import Lab_4_SRP.Клиент as zhopa
 
 
 def lab_1():
@@ -37,11 +39,20 @@ def lab_3():
 
 def lab_4():
 
-    s = "qwezxczxczxczxczxvgfdshsdfns"
-    b = ""
-    for i in s:
-        b += i
-        hash_it(b)
+    клиент = Клиент()
+    сервер = Сервер(клиент.k, клиент.N, клиент.g)
+    клиент.сервер = сервер
+    клиент.зарегать()
+    клиент.залогиниться()
+
+    сервер.вычислить_скремблер()
+    клиент.вычислить_скремблер()
+
+    сервер.вычислить_ключ_сессии()
+    клиент.вычислить_ключ_сессии()
+
+    клиент.сгенерировать_подтверждение()
+
 
 
 if __name__ == '__main__':
@@ -63,4 +74,5 @@ if __name__ == '__main__':
             lab_4()
         elif a == "0":
             exit()
+
 
