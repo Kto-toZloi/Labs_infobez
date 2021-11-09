@@ -1,6 +1,6 @@
 import random
 
-
+'''Практическая 1 - проверка числа на простоту'''
 def miller_rabin(number):
     if number % 2 == 0:
         return False
@@ -30,7 +30,7 @@ def miller_rabin(number):
             return False
     return True
 
-
+'''Практическая 1 - генерация простых чисел'''
 def generate_prime_number(left_border, right_border):
     while True:
         number = random.randint(left_border, right_border)

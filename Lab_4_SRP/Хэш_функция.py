@@ -1,5 +1,5 @@
 def hash_it(data):
-    """Функция для хэширования данных"""
+    """Функция для хэширования данных - практическая 2"""
     len_s = len(data)
     p = "".join(list(map(lambda y: bin(y)[2:], list(map(ord, list(data))))))
     x = int(p[7:] + '0' * 7, 2)
