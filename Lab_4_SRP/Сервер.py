@@ -12,10 +12,14 @@ class Сервер:
         self.g = g
         self.ключ_сессии = None
 
+        print(f"Сервер K = {self.K}, N = {self.N}")
+
     def зарегать(self, список):
         self.имя_пользователя, self.соль, self.верификатор = список
+        print(f"Сервер получил: {self.имя_пользователя=},{self.соль=},{self.верификатор=}")
 
     def проверить_А(self, список, клиент):
+
         i, self.A = список
         if self.A == 0:
             raise Exception("A = 0")
@@ -23,7 +27,7 @@ class Сервер:
         self.b = random.randint(0, 10000000000000000)
 
         self.B = (self.K * self.верификатор + pow(self.g(self.N), self.b, self.N)) % self.N
-
+        print(f"Сервер проверяет А ({self.A=}) на неравенство нулю и формирует B ({self.B=})")
         клиент.проверить_B([self.соль, self.B])
 
     def вычислить_скремблер(self):
@@ -41,7 +45,7 @@ class Сервер:
              int(self.Хэш(self.g(self.N).__str__()), 16)
              ).__str__() +
                      self.Хэш(self.имя_пользователя) + self.соль + self.A.__str__() + self.B.__str__() + self.ключ_сессии)
-
+        print(f"Сервер вычисляет М сам {M=} и если они равны - то всё хорошо")
         if M == M_клиента:
             print(f"OK  M1 сгенерировалось и значение одинаковое как на сервере так и на клиенте {M=}")
         else:

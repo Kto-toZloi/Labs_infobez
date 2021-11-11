@@ -2,11 +2,9 @@ from Lab_1_Caesar.Encrypt import *
 from Lab_1_Caesar.Decrypt import *
 from Lab_2_Diffie_Hellman.Negotiator import *
 from Lab_2_Diffie_Hellman.bum_in_the_middle import *
-import Lab_3_RSA.Sender
 import Lab_3_RSA.Receiver as Приёмник
 from Lab_4_SRP.Клиент import Клиент
 from Lab_4_SRP.Сервер import Сервер
-import Lab_4_SRP.Клиент as zhopa
 
 
 def lab_1():
@@ -48,8 +46,12 @@ def lab_4():
     сервер.вычислить_скремблер()
     клиент.вычислить_скремблер()
 
+    print(f"Далее оба вычисляют скремблер {сервер.скремблер=} {клиент.скремблер=}")
+
     сервер.вычислить_ключ_сессии()
     клиент.вычислить_ключ_сессии()
+
+    print(f"Далее оба вычисляют ключ сессии {сервер.ключ_сессии=} {клиент.ключ_сессии=}")
 
     клиент.сгенерировать_подтверждение()
 

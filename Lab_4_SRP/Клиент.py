@@ -44,23 +44,33 @@ class Клиент:
         self.username = "PAPA_KARLO"
         self.сервер = None
 
+        print(f"Клиент число N = {self.N}, k = {self.k}")
+
+
     def зарегать(self):
+
         self.соль = str(random.randbytes(500))
         x = self.Хэш(self.соль + self.пароль)
         v = pow(self.g(self.N), int(x, 16), self.N)
+
+        print(f"Клиент хочет зарегистрироваться: s = {self.соль}, пароль = {self.пароль}")
+        print(f"s + пароль после хэширования = {x}")
+        print(f"{v}")
 
         self.сервер.зарегать([self.username, self.соль, v])  # отправить серверу
 
 
     def залогиниться(self):
+        print("Клиент хочет залогиниться", end="...")
         I = self.username
         self.a = random.randint(1, 10000000000000)
         self.A = pow(self.g(self.N), self.a, self.N)
-
+        print(f"На сервер отправлено: {self.username=}, {self.A=}")
         self.сервер.проверить_А([I, self.A], self)
 
     def проверить_B(self, список):
         self.B = список[1]
+        print(f"Клиент получает полученное B ({self.B=}) на неравенство нулю")
         if self.B == 0:
             raise Exception("B = 0")
 
@@ -79,5 +89,5 @@ class Клиент:
     def сгенерировать_подтверждение(self):
         M = self.Хэш((int(self.Хэш(self.N.__str__()), 16) ^ int(self.Хэш(self.g(self.N).__str__()), 16)).__str__() +
                       self.Хэш(self.username) + self.соль + self.A.__str__() + self.B.__str__() + self.ключ_сессии)
-
+        print(f"Затем формируется M со стороны клиента {M=} и отправляется на проверку серверу")
         self.сервер.проверить_М(M)
